@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -19,6 +20,7 @@ namespace Timer
     {
         private readonly Stopwatch _stopwatch;
         private readonly string _title;
+        private readonly Stream _stream;
         private readonly StreamWriter _streamWriter;
         private bool _disposed;
         private readonly SafeHandle _handle = new SafeFileHandle(IntPtr.Zero, true);
@@ -36,6 +38,12 @@ namespace Timer
                 throw new ArgumentNullException(nameof(stream));
             }
 
+            if (!stream.CanWrite)
+            {
+                throw new ArgumentException(nameof(stream) + " must be write-able.");
+            }
+
+            _stream = stream;
             _streamWriter = new StreamWriter(stream);
             _title = title;
             _stopwatch = Stopwatch.StartNew();
@@ -68,10 +76,12 @@ namespace Timer
                 var title = "";
                 if (_title != null)
                 {
-                    title = _title + ": ";
+                    title = _title + " ";
                 }
 
                 _streamWriter.WriteLine($"{title}Duration: {_stopwatch.Elapsed}");
+                _streamWriter.Flush();
+                _stream.Flush();
             }
         }
 
