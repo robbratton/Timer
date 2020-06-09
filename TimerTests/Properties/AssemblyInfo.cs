@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TimerTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("UPMC")]
+[assembly: AssemblyCompany("Robert E. Bratton")]
 [assembly: AssemblyProduct("TimerTests")]
-[assembly: AssemblyCopyright("Copyright © UPMC 2020")]
+[assembly: AssemblyCopyright("Copyright © Robert E. Bratton 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
